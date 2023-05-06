@@ -1,0 +1,2 @@
+# chatgpt_online_text
+针对PHP网络环境编写的获取ChatGPT联网文本回答API
