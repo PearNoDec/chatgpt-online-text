@@ -22,7 +22,7 @@ online：联网文本
 
 ## 接口API图片
 
-![Image text](https://raw.github.com/PearNoDec/repositpry/master/chatgpt-online-text/api_test.png)
+![Image text](api_test.png)
 
 ## 下载途径
 
