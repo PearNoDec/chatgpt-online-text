@@ -22,8 +22,15 @@ online：联网文本
 
 ## 接口API图片
 
+![Image text](https://raw.github.com/PearNoDec/repositpry/master/chatgpt-online-text/api_test.png)
 
-使用方法：直接下载online.php文本部署到服务器即可使用
+## 下载途径
+
+使用方法：
+
+直接下载online.php文本部署到服务器即可使用.
+
+通过git clone拉取本仓库代码即可.
 
 喜欢的朋友记得点个Star!!
 ___
