@@ -41,34 +41,42 @@ function getCurrentDate(){
 }
 
 $instructionMessage = $_REQUEST['message'];
-$seg_list = Jieba::cut($instructionMessage);
-$seg_list_result = implode(" ",$seg_list);
-$searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result);
-$requestData = sendGetRequests($searchUrl);
-preg_match_all("/aria-label=\"(.*?)\"/",$requestData,$titleMatches);
-preg_match_all("/<span class=\" fc-falcon\">(.*?)<\/span>/",$requestData,$contentMatches);
-preg_match_all("/class=\"d-ib p-abs t-0 l-0 fz-14 lh-20 fc-obsidian wr-bw ls-n pb-4\"><span>(.*?)<\/span><span>/",$requestData,$urlMatches);
-$searchUrls = $urlMatches[1];
-$searchTitles = $titleMatches[1];
-$searchContents = $contentMatches[1];
-$aggregateArray = array();
-for($i=0; $i<5; $i++){
-    $index = $i+1;
-    $singleContent = $searchContents[$i];
-    $singleTitle = $searchTitles[$i];
-    $singleUrl = $searchUrls[$i];
-    $singleContentCleaned = strip_tags($singleContent);
-    $singleString = "NUMBER:$index\nURL:$singleUrl\nTITLE:$singleTitle\nCONTENT:$singleContent";
-    array_push($aggregateArray, $singleString);
+if(empty($instructionMessage)){
+    $content=array(
+        'code' => "203",
+        'msg' => "请输入待回答的问题");
+    print_r(json_encode($content,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
 }
-$compiledContents = implode("\n\n", $aggregateArray);
-$currentDate = getCurrentDate();
-$replyInstruction = "I will give you a question or an instruction. Your objective is to answer my question or fulfill my instruction.\n\nMy question or instruction is: $instructionMessage\n\nFor your reference, today's date is $currentDate.\n\nIt's possible that the question or instruction, or just a portion of it, requires relevant information from the internet to give a satisfactory answer or complete the task. Therefore, provided below is the necessary information obtained from the internet, which sets the context for addressing the question or fulfilling the instruction. You will write a comprehensive reply to the given question or instruction. Make sure to cite results using [[NUMBER](URL)] notation after the reference. If the provided information from the internet results refers to multiple subjects with the same name, write separate answers for each subject:\n\"\"\"\n$compiledContents\n\"\"\"\nReply in 中文";
- $content = array(
-    'code' => "200",
-    'msg' => "获取成功",
-    'message'=>"$instructionMessage",
-    'online'=>"$replyInstruction"
-);
-print_r(json_encode($content,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+else{
+    $seg_list = Jieba::cut($instructionMessage);
+    $seg_list_result = implode(" ",$seg_list);
+    $searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result);
+    $requestData = sendGetRequests($searchUrl);
+    preg_match_all("/aria-label=\"(.*?)\"/",$requestData,$titleMatches);
+    preg_match_all("/<span class=\" fc-falcon\">(.*?)<\/span>/",$requestData,$contentMatches);
+    preg_match_all("/class=\"d-ib p-abs t-0 l-0 fz-14 lh-20 fc-obsidian wr-bw ls-n pb-4\"><span>(.*?)<\/span><span>/",$requestData,$urlMatches);
+    $searchUrls = $urlMatches[1];
+    $searchTitles = $titleMatches[1];
+    $searchContents = $contentMatches[1];
+    $aggregateArray = array();
+    for($i=0; $i<5; $i++){
+        $index = $i+1;
+        $singleContent = $searchContents[$i];
+        $singleTitle = $searchTitles[$i];
+        $singleUrl = $searchUrls[$i];
+        $singleContentCleaned = strip_tags($singleContent);
+        $singleString = "NUMBER:$index\nURL:$singleUrl\nTITLE:$singleTitle\nCONTENT:$singleContent";
+        array_push($aggregateArray, $singleString);
+    }
+    $compiledContents = implode("\n\n", $aggregateArray);
+    $currentDate = getCurrentDate();
+    $replyInstruction = "I will give you a question or an instruction. Your objective is to answer my question or fulfill my instruction.\n\nMy question or instruction is: $instructionMessage\n\nFor your reference, today's date is $currentDate.\n\nIt's possible that the question or instruction, or just a portion of it, requires relevant information from the internet to give a satisfactory answer or complete the task. Therefore, provided below is the necessary information obtained from the internet, which sets the context for addressing the question or fulfilling the instruction. You will write a comprehensive reply to the given question or instruction. Make sure to cite results using [[NUMBER](URL)] notation after the reference. If the provided information from the internet results refers to multiple subjects with the same name, write separate answers for each subject:\n\"\"\"\n$compiledContents\n\"\"\"\nReply in 中文";
+     $content = array(
+        'code' => "200",
+        'msg' => "获取成功",
+        'message'=>"$instructionMessage",
+        'online'=>"$replyInstruction"
+    );
+    print_r(json_encode($content,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+}
 ?>
