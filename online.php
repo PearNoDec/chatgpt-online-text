@@ -37,7 +37,7 @@ if(empty($message)){
 }
 else{
     $message_bm=urlencode($message);
-    $post_data="q=$message_bm&df=&kl=wt-wt";
+    $post_data="q=$message_bm&df=&kl=cn-zh";
     $data=send_post_lw($post_data);
     preg_match_all("/<a rel=\"nofollow\" href=\"(.*?)\" class=\'result-link\'>.*<\/a>/",$data,$urlss);
     preg_match_all("/<td class=\'result-snippet\'>\s*(.*?)\s*<\/td>/",$data,$contentss);
