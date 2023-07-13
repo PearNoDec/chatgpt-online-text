@@ -42,6 +42,7 @@ online：联网文本
 ## 鸣谢
 
 ChatGPT-Online-Text 项目灵感来源于 chatgpt-advanced 插件。
+
 项目来源：https://github.com/qunash/chatgpt-advanced
 
 接口调用：https://lite.duckduckgo.com/
