@@ -1,7 +1,11 @@
 <?php
+ini_set('memory_limit', '1024M');
 date_default_timezone_set('Asia/Shanghai');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type:application/json;charset=utf-8");
+require 'vendor/autoload.php';
+use Fukuball\Jieba\Jieba;
+Jieba::init();
 function sendGetRequests($requestUrl){
     $curlHandler = curl_init();
     curl_setopt($curlHandler, CURLOPT_URL, $requestUrl);
@@ -37,7 +41,9 @@ function getCurrentDate(){
 }
 
 $instructionMessage = $_REQUEST['message'];
-$searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($instructionMessage);
+$seg_list = Jieba::cut($instructionMessage);
+$seg_list_result = implode(" ",$seg_list);
+$searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result)."&ei=UTF-8";
 $requestData = sendGetRequests($searchUrl);
 preg_match_all("/aria-label=\"(.*?)\"/",$requestData,$titleMatches);
 preg_match_all("/<span class=\" fc-falcon\">(.*?)<\/span>/",$requestData,$contentMatches);
