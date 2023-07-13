@@ -1,10 +1,10 @@
 # ChatGPT-Online-Text
 
-ChatGPT-Online-Text 是一个用 PHP 编写的脚本程序，其功能是通过 DuckDuckGo 的 Lite 版本获取前三条资讯，并对这些资讯进行语言文本整合。用户可以提问 ChatGPT 联网后的回答。
+ChatGPT-Online-Text 是一个用 PHP 编写的脚本程序，其功能是通过 Yahoo 获取前三条资讯，并对这些资讯进行语言文本整合。用户可以提问 ChatGPT 联网后的回答。
 
 ## 功能特性
 
-- 通过 DuckDuckGo Lite 版本获取前三条资讯
+- 通过 Yahoo 获取前三条资讯
 - 对资讯进行语言文本整合
 - 用户可以使用 ChatGPT 提问并即时获取回答
 
@@ -33,7 +33,7 @@ online：联网文本
 
 ## 示例
 
-![Image text](online.png)
+![Image text](success.png)
 
 ## 版权信息
 
