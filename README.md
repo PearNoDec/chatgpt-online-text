@@ -33,7 +33,7 @@ online：联网文本
 
 ## 示例
 
-![Image text](api_test.png)
+![Image text](online.png)
 
 ## 版权信息
 
