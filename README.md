@@ -1,6 +1,6 @@
-# ChatGPT-Online-Text
+# ChatGPTOnlineText 
 
-ChatGPT-Online-Text 是一个用 PHP 编写的脚本程序，其功能是通过 Yahoo 获取前三条资讯，并对这些资讯进行语言文本整合。用户可以提问 ChatGPT 联网后的回答。
+ChatGPTOnlineText  是一个用 PHP 编写的脚本程序，其功能是通过 Yahoo 获取前三条资讯，并对这些资讯进行语言文本整合。用户可以提问 ChatGPT 联网后的回答。
 
 ## 功能特性
 
