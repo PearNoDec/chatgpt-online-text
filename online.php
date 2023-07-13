@@ -24,7 +24,7 @@ function sendGetRequests($requestUrl){
             'code' => "500",
             'msg' => "访问出错"
         );
-        print_r(json_encode($errorContent, JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        print_r(json_encode($errorContent,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
         exit();
     }
     curl_close($curlHandler);
@@ -43,7 +43,7 @@ function getCurrentDate(){
 $instructionMessage = $_REQUEST['message'];
 $seg_list = Jieba::cut($instructionMessage);
 $seg_list_result = implode(" ",$seg_list);
-$searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result)."&ei=UTF-8";
+$searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result);
 $requestData = sendGetRequests($searchUrl);
 preg_match_all("/aria-label=\"(.*?)\"/",$requestData,$titleMatches);
 preg_match_all("/<span class=\" fc-falcon\">(.*?)<\/span>/",$requestData,$contentMatches);
@@ -52,7 +52,7 @@ $searchUrls = $urlMatches[1];
 $searchTitles = $titleMatches[1];
 $searchContents = $contentMatches[1];
 $aggregateArray = array();
-for($i=0; $i<3; $i++){
+for($i=0; $i<5; $i++){
     $index = $i+1;
     $singleContent = $searchContents[$i];
     $singleTitle = $searchTitles[$i];
@@ -70,5 +70,5 @@ $replyInstruction = "I will give you a question or an instruction. Your objectiv
     'message'=>"$instructionMessage",
     'online'=>"$replyInstruction"
 );
-print_r(json_encode($content,JSON_UNESCAPED_UNICODE));
+print_r(json_encode($content,JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
 ?>
