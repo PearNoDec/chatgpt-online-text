@@ -59,7 +59,7 @@ else{
     $searchTitles = $titleMatches[1];
     $searchContents = $contentMatches[1];
     $aggregateArray = array();
-    for($i=0; $i<5; $i++){
+    for($i=0; $i<3; $i++){
         $index = $i+1;
         $singleContent = $searchContents[$i];
         $singleTitle = $searchTitles[$i];
