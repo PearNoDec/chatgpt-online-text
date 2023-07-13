@@ -50,7 +50,7 @@ if(empty($instructionMessage)){
 else{
     $seg_list = Jieba::cut($instructionMessage);
     $seg_list_result = implode(" ",$seg_list);
-    $searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result);
+    $searchUrl = "https://sg.search.yahoo.com/search?p=".urlencode($seg_list_result)."&ei=UTF-8";
     $requestData = sendGetRequests($searchUrl);
     preg_match_all("/aria-label=\"(.*?)\"/",$requestData,$titleMatches);
     preg_match_all("/<span class=\" fc-falcon\">(.*?)<\/span>/",$requestData,$contentMatches);
